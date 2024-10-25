@@ -10,6 +10,7 @@ namespace THT.JMS.Application.Features.UserFeatures
 {
     public class UserSearch : BaseSearch
     {
-
+        public string? Ids { get; set; }
+        public string? Roles { get; set; }
     }
 }

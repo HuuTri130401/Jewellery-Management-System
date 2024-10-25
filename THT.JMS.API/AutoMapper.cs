@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using THT.JMS.Application.Features.UserFeatures;
 using THT.JMS.Domain.Entities;
+using THT.JMS.Utilities;
 
 namespace THT.JMS.API
 {
@@ -12,7 +13,7 @@ namespace THT.JMS.API
             CreateMap<UserModel, Users>().ReverseMap();
             CreateMap<UserCreate, Users>().ReverseMap();
             CreateMap<UserUpdate, Users>().ReverseMap();
-            //CreateMap<PagedList<UserModel>, PagedList<Users>>().ReverseMap();
+            CreateMap<PagedList<UserModel>, PagedList<Users>>().ReverseMap();
 
         }
     }

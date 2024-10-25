@@ -93,7 +93,7 @@ namespace THT.JMS.Persistence.Service
 
                 return new UserLoginResponseModel()
                 {
-                    Token = token,
+                    Token = "Bearer " + token,
                     RefreshToken = refreshToken,
                     RefreshTokenExpiryTime = refreshTokenExpiryTime,
                 };

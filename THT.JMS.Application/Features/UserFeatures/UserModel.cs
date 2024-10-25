@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace THT.JMS.Application.ResponseModels
+namespace THT.JMS.Application.Features.UserFeatures
 {
     public class UserModel
     {

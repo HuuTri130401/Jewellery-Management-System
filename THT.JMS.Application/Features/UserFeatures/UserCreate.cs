@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace THT.JMS.Application.CreateModels
+namespace THT.JMS.Application.Features.UserFeatures
 {
     public class UserCreate
     {

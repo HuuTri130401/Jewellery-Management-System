@@ -1,22 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using THT.JMS.Persistence;
-using THT.JMS.Persistence.Context;
 using THT.JMS.Application;
-
+using THT.JMS.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //============ Config Persistence and Application Project ============//
 builder.Services.ConfigurePersistence(builder.Configuration);
 builder.Services.ConfigureApplication();
-
-//============ Connect DB ============//
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//{
-//    options.UseSqlServer(builder.Configuration["ConnectionStrings:JMSDbContext"]);
-//    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-//});
 
 //============ AutoMapper ============//
 builder.Services.AddAutoMapper(typeof(Program));
@@ -37,6 +28,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

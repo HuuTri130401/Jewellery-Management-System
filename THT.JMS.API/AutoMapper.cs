@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using THT.JMS.Application.CreateModels;
-using THT.JMS.Application.ResponseModels;
-using THT.JMS.Application.UpdateModels;
+using THT.JMS.Application.Features.UserFeatures;
 using THT.JMS.Domain.Entities;
 
 namespace THT.JMS.API

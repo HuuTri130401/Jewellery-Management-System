@@ -12,9 +12,4 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\THT.JMS.Application\THT.JMS.Application.csproj" />
-    <ProjectReference Include="..\THT.JMS.Persistence\THT.JMS.Persistence.csproj" />
-  </ItemGroup>
-
 </Project>

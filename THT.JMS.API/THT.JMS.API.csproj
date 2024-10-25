@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\THT.JMS.Application\THT.JMS.Application.csproj" />
-    <ProjectReference Include="..\THT.JMS.Extensions\THT.JMS.Extensions.csproj" />
+    <ProjectReference Include="..\THT.JMS.Persistence\THT.JMS.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

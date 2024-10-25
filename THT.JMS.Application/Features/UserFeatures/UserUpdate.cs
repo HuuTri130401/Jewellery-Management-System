@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace THT.JMS.Application.UpdateModels
+namespace THT.JMS.Application.Features.UserFeatures
 {
     public class UserUpdate
     {

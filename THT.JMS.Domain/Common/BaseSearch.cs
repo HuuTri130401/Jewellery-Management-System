@@ -27,12 +27,15 @@ namespace THT.JMS.Domain.Common
         /// Nội dung tìm kiếm chung
         /// </summary>
         [StringLength(1000, ErrorMessage = "Nội dung không vượt quá 1000 kí tự")]
-        public string SearchContent { set; get; }
+        public string? SearchContent { set; get; }
 
         /// <summary>
         /// Không dùng
         /// </summary>
         [DefaultValue(0)]
         public virtual int OrderBy { set; get; }
+
+        [DefaultValue(true)]
+        public bool? IsPaged { set; get; }
     }
 }

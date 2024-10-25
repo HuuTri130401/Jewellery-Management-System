@@ -29,8 +29,7 @@ namespace THT.JMS.Persistence
             services.AddScoped(typeof(IDomainRepository<>), typeof(DomainRepository<>));
 
             #region Entity_Repo
-            //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IDomainService<Users, BaseSearch>, DomainService<Users, BaseSearch>>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
             #endregion Entity_Repo
 

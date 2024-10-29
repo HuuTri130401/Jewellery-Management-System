@@ -17,6 +17,11 @@ namespace THT.JMS.Application.Features.UserFeatures
     {
         private IConfiguration _configuaration;
 
+        /*
+         base(unitOfWork, mapper) gọi đến constructor của lớp cha (DomainService), và mục đích của base là để truyền các dependency 
+         từ UserService lên DomainService. Điều này có nghĩa là UserService không cần khởi tạo lại IUnitOfWork và IMapper, mà chỉ 
+         cần truyền chúng lên lớp cha để DomainService xử lý.
+         */
         public UserService(IConfiguration configuaration, IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
             _configuaration = configuaration;

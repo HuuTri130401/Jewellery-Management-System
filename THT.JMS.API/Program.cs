@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using THT.JMS.Application;
@@ -12,6 +12,9 @@ builder.Services.ConfigureApplication();
 
 //============ AutoMapper ============//
 builder.Services.AddAutoMapper(typeof(Program));
+
+//============ CORS ============//
+builder.Services.AddCors();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -46,6 +49,18 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+
+// Thiết lập HTTPS redirection chỉ khi không ở môi trường phát triển (Development)
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Services.AddHttpsRedirection(options =>
+    {
+        //AddHttpsRedirection: Cấu hình ứng dụng để tự động chuyển hướng HTTP sang HTTPS trong môi trường sản xuất
+        options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
+        options.HttpsPort = 443;
+    });
+}
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -54,6 +69,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseSwagger();
 }
+
+//if (!app.Environment.IsDevelopment())
+//{
+//    //UseHttpsRedirection: Kích hoạt middleware chuyển hướng sang HTTPS.
+//    app.UseHttpsRedirection();
+//}
+
+app.UseCors(builder =>
+{
+    builder.AllowAnyHeader()
+    .AllowAnyOrigin()
+    .AllowAnyMethod();
+});
 
 app.UseHttpsRedirection();
 

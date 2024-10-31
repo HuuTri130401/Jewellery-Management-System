@@ -70,12 +70,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
 }
 
-//if (!app.Environment.IsDevelopment())
-//{
-//    //UseHttpsRedirection: Kích hoạt middleware chuyển hướng sang HTTPS.
-//    app.UseHttpsRedirection();
-//}
-
 app.UseCors(builder =>
 {
     builder.AllowAnyHeader()
@@ -83,6 +77,7 @@ app.UseCors(builder =>
     .AllowAnyMethod();
 });
 
+//UseHttpsRedirection: Kích hoạt middleware chuyển hướng sang HTTPS.
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

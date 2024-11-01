@@ -52,15 +52,15 @@ builder.Services.AddSwaggerGen(c =>
 
 
 // Thiết lập HTTPS redirection chỉ khi không ở môi trường phát triển (Development)
-if (!builder.Environment.IsDevelopment())
-{
-    builder.Services.AddHttpsRedirection(options =>
-    {
-        //AddHttpsRedirection: Cấu hình ứng dụng để tự động chuyển hướng HTTP sang HTTPS trong môi trường sản xuất
-        options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
-        options.HttpsPort = 443;
-    });
-}
+//if (!builder.Environment.IsDevelopment())
+//{
+//    builder.Services.AddHttpsRedirection(options =>
+//    {
+//        //AddHttpsRedirection: Cấu hình ứng dụng để tự động chuyển hướng HTTP sang HTTPS trong môi trường sản xuất
+//        options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
+//        options.HttpsPort = 443;
+//    });
+//}
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

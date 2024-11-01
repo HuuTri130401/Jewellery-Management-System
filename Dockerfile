@@ -29,35 +29,37 @@
 # ENTRYPOINT ["dotnet", "THT.JMS.API.dll"]
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-USER app
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-
-ARG BUILD_CONFIGURATION=Release
-
 WORKDIR /src
 
-COPY ["./THT.JMS.API/THT.JMS.API.csproj", "src/THT.JMS.API/"]
-COPY ["./THT.JMS.Application/THT.JMS.Application.csproj", "src/THT.JMS.Application/"]
-COPY ["./THT.JMS.Domain/THT.JMS.Domain.csproj", "src/THT.JMS.Domain/"]
-COPY ["./THT.JMS.Persistence/THT.JMS.Persistence.csproj", "src/THT.JMS.Persistence/"]
-COPY ["./THT.JMS.Utilities/THT.JMS.Utilities.csproj", "src/THT.JMS.Utilities/"]
+# copy all the layers' csproj files into respective folders
+COPY ["./src/THT.JMS.API/THT.JMS.API.csproj", "./src/THT.JMS.API/"]
+COPY ["./src/THT.JMS.Application/THT.JMS.Application.csproj", "./src/THT.JMS.Application/"]
+COPY ["./src/THT.JMS.Domain/THT.JMS.Domain.csproj", "./src/THT.JMS.Domain/"]
+COPY ["./src/THT.JMS.Persistence/THT.JMS.Persistence.csproj", "./src/THT.JMS.Persistence/"]
+COPY ["./src/THT.JMS.Utilities/THT.JMS.Utilities.csproj", "./src/THT.JMS.Utilities/"]
 
-RUN dotnet restore "src/THT.JMS.API/THT.JMS.API.csproj"
+# run restore over API project - this pulls restore over the dependent projects as well
+RUN dotnet restore "./src/THT.JMS.API/THT.JMS.API.csproj"
 
 COPY . .
-WORKDIR "/src/THT.JMS.API"
-RUN dotnet build "THT.JMS.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+# run build over the API project
+WORKDIR "./src/THT.JMS.API"
+RUN dotnet build -c Release -o /app/build
+
+# run publish over the API project
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "THT.JMS.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish -c Release -o /app/publish
 
-FROM base AS final
+FROM base AS runtime
 WORKDIR /app
 
 COPY --from=publish /app/publish .
-ENV ASPNETCORE_URLS=http://+:5000
-ENTRYPOINT ["dotnet", "THT.JMS.API.dll","--server.urls","http://*/5000"]
+RUN ls -l
+ENTRYPOINT ["dotnet", "THT.JMS.API.dll"]
+
+
